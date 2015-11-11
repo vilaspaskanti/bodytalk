@@ -34,7 +34,7 @@ public class Registration {
 	@JoinTable(name="REGISTRATION_PACKAGE",
 	joinColumns=@JoinColumn(name="registration_id",referencedColumnName="id"),
 	inverseJoinColumns=@JoinColumn(name="package_id",referencedColumnName="id"))
-	private Set<Package> packages;
+	private Set<GymPackage> packages;
 */
 	
 	

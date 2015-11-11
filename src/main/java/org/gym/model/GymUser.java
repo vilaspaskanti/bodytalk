@@ -99,11 +99,12 @@ public class GymUser {
 		this.emailId = emailId;
 	}
 
-	public Set<Registration> getPackages() {
-		return this.registrations;
+
+	public Set<Registration> getRegistrations() {
+		return registrations;
 	}
 
-	public void setPackages(Set<Registration> registrations) {
+	public void setRegistrations(Set<Registration> registrations) {
 		this.registrations = registrations;
 	}
 
