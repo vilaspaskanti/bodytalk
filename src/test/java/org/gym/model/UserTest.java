@@ -25,6 +25,12 @@ public class UserTest {
 	UserService userService;
 	DateFormat dt =  new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
 	
+	@Test
+	public void getUser() {
+		GymUser user = userService.getUser(1L);
+		System.out.println(user.getFirstName());
+	}
+	
 	
 	/*@Test*/
 	@Rollback(value=false)
