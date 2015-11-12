@@ -13,10 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PaymentDaoImpl extends GenericDaoImpl<Long, Payment> implements PaymentDao {
 	
-	@Override
-	public Payment  fetchEntityById(final Long id) {
+	public PaymentDaoImpl() {
 		setEntityClass(Payment.class);
-		return super.fetchEntityById(id);
 	}
 
 	@Override

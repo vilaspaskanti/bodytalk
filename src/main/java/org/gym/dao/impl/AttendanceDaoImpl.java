@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AttendanceDaoImpl extends GenericDaoImpl<Long, Attendance> implements AttendenceDao {
 
-	@Override
-	public Attendance  fetchEntityById(final Long id) {
+	public AttendanceDaoImpl() {
 		setEntityClass(Attendance.class);
-		return super.fetchEntityById(id);
 	}
 }

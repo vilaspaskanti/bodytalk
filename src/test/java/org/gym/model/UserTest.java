@@ -99,8 +99,4 @@ public class UserTest {
 		}
 
 	}
-	public static void main(final String[] args)
-	{
-		
-	}
 }

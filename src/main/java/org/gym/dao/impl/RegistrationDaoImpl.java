@@ -12,10 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RegistrationDaoImpl extends GenericDaoImpl<Long, Registration> implements RegistrationDao {
 	
-	@Override
-	public Registration  fetchEntityById(final Long id) {
+	public RegistrationDaoImpl() {
 		setEntityClass(Registration.class);
-		return super.fetchEntityById(id);
 	}
 
 	@Override
@@ -35,6 +33,7 @@ public class RegistrationDaoImpl extends GenericDaoImpl<Long, Registration> impl
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("startDate",startDate);
 		query.setParameter("endDate",endDate);
+		@SuppressWarnings("unchecked")
 		List<Registration> results = query.list();
 		System.out.println("results.size --- "+results.size());
 		return results;
