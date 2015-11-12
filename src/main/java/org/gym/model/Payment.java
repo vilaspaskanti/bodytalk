@@ -49,4 +49,19 @@ public class Payment {
 		this.paymentAmount = paymentAmount;
 	}
 
+	public Registration getRegistration() {
+		return registration;
+	}
+
+	public void setRegistration(Registration registration) {
+		this.registration = registration;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment [id=" + id + ", paymentDate=" + paymentDate + ", paymentAmount=" + paymentAmount
+				+ ", registration=" + registration.getStartDate() + "]";
+	}
+	
+	
 }

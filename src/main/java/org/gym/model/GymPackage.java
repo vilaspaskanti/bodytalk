@@ -18,7 +18,6 @@ public class GymPackage {
 	
 	private String description;
 	
-	private Double cost;
 	
 	public Long getId() {
 		return id;
@@ -34,14 +33,6 @@ public class GymPackage {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Double getCost() {
-		return cost;
-	}
-
-	public void setCost(Double cost) {
-		this.cost = cost;
 	}
 
 	public String getCode() {

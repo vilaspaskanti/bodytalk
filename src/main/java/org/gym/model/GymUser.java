@@ -155,5 +155,11 @@ public class GymUser {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
+
+	@Override
+	public String toString() {
+		return "GymUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNo=" + phoneNo
+				+ "]";
+	}
 	
 }

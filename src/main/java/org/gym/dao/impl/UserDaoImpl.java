@@ -6,7 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDaoImpl extends GenericDaoImpl<Long, GymUser> implements UserDao {
-	
-	
-	
+
+	@Override
+	public GymUser fetchEntityById(Long id) {
+		setEntityClass(GymUser.class);
+		return super.fetchEntityById(id);
+	}
 }

@@ -13,6 +13,11 @@ public class GenericDaoImpl<K, E> implements GenericDao<K, E>{
 	
 	Class<E> entityClass;
 	
+	
+	public void setEntityClass(Class<E> entityClass) {
+		this.entityClass = entityClass;
+	}
+
 	@Override
 	public E save(E object) {
 		sessionFactory.getCurrentSession().save(object);
@@ -33,6 +38,7 @@ public class GenericDaoImpl<K, E> implements GenericDao<K, E>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public E fetchEntityById(K id) {
+
 		return (E)sessionFactory.getCurrentSession().get(entityClass , (Serializable) id);
 	}
 

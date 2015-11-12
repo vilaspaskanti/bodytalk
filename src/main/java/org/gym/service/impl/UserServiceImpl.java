@@ -2,8 +2,11 @@ package org.gym.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+import org.gym.dao.AttendenceDao;
+import org.gym.dao.PaymentDao;
+import org.gym.dao.RegistrationDao;
 import org.gym.dao.UserDao;
 import org.gym.model.Attendance;
 import org.gym.model.GymPackage;
@@ -19,28 +22,39 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	RegistrationDao registrationDao;
+	@Autowired
+	PaymentDao paymentDao;
+	@Autowired
+	AttendenceDao attendenceDao;
 
 	@Override
 	public GymUser saveUser(GymUser user) {
 		return userDao.save(user);
 	}
+	
+	@Override
+	public GymUser getUser(Long memberId) {
+		return userDao.fetchEntityById(memberId);
+	}
 
 	@Override
 	public Registration saveRegistration(Registration registration) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return registrationDao.save(registration); 
 	}
 
 	@Override
-	public Attendance saveAttendence(Attendance registration) {
-		// TODO Auto-generated method stub
-		return null;
+	public Attendance saveAttendence(final Attendance attendence) {
+
+		return attendenceDao.save(attendence);
 	}
 
 	@Override
-	public Payment createPaymentTransaction(Payment transaction) {
-		// TODO Auto-generated method stub
-		return null;
+	public Payment createPaymentTransaction(final Payment transaction) {
+
+		return paymentDao.save(transaction);
 	}
 
 	@Override
@@ -50,32 +64,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<Registration> getRegistrations(GymUser gymUser) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Registration> getRegistrations(final GymUser gymUser) {
+
+		return registrationDao.getRegistrations(gymUser);
 	}
 
 	@Override
-	public Set<Registration> getRegistrations(Date startDate, Date endDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Registration> getRegistrations(Date startDate, Date endDate) {
+
+		return registrationDao.getRegistrations(startDate,endDate);	
 	}
 
 	@Override
-	public Set<Payment> getPayments(Registration registration) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Payment> getPayments(final Registration registration) {
+		return paymentDao.getPayments(registration);	
 	}
 
 	@Override
-	public Set<Payment> getPayments(GymUser gymUser) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Payment> getPayments(final GymUser gymUser) {
+
+		return paymentDao.getPayments(gymUser);	
 	}
 
 	@Override
 	public BigDecimal getBalanceDue(GymUser gymUser) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -97,5 +109,15 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	
+	@Override
+	public GymUser getUserPhoneNo(Long phoneNo) {
+		
+		return null;
+	}
+
+	@Override
+	public GymUser getUserCode(Long memberCode) {
+
+		return userDao.fetchEntityById(memberCode);
+	}
 }

@@ -1,0 +1,9 @@
+insert into GymPackage values (1,'BodyTalkPKG1','Cardio Gym1','Cardio');
+insert into GymPackage values (2,'BodyTalkPKG2','Cardio Gym2','Aerobics');
+insert into GymPackage values (3,'BodyTalkPKG3','Cardio Gym3','Dance');
+insert into GymPackage values (4,'BodyTalkPKG4','Cardio Gym4','Pump');
+insert into GymPackage values (5,'BodyTalkPKG5','Cardio Gym5','Crunch');
+insert into GymPackage values (6,'BodyTalkPKG6','Cardio Gym6','Lorem');
+insert into GymPackage values (7,'BodyTalkPKG7','Cardio Gym7','Ipsum');
+insert into GymPackage values (8,'BodyTalkPKG8','Cardio Gym8','Dolare');
+insert into GymPackage values (9,'BodyTalkPKG9','Cardio Gym9','polore');
