@@ -1,3 +1,5 @@
+<%@page contentType="text/html; charset=UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- sidebar: style can be found in sidebar.less -->
 <section class="sidebar">
     
@@ -13,22 +15,23 @@
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li class="active">
-                <a href="index.html">
+        	
+            <li class="${page == 'enquiry' ? 'active' : ''}">
+                <a href="${pageContext.request.contextPath}/enquiry">
                     <i class="fa fa-dashboard"></i> <span>Enquiry</span>
                 </a>
             </li>
-            <li>
+            <li class="${page == 'registration' ? 'active' : ''}">
                 <a href="pages/widgets.html">
                     <i class="fa fa-edit"></i> <span>Registration</span> 
                 </a>
             </li>
-			<li>
+			<li class="${page == 'payments' ? 'active' : ''}">
                 <a href="pages/widgets.html">
                     <i class="fa fa-money"></i> <span>Payments</span> 
                 </a>
             </li>
-			<li>
+			<li class="${page == 'attendance' ? 'active' : ''}">
                 <a href="pages/widgets.html">
                     <i class="fa fa-th"></i> <span>Attendance</span> 
                 </a>
