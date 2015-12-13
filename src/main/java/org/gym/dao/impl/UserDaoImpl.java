@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDaoImpl extends GenericDaoImpl<Long, GymUser> implements UserDao {
 
+	
 	public UserDaoImpl() {
 		setEntityClass(GymUser.class);
 	}

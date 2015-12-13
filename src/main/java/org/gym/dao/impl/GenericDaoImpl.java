@@ -5,10 +5,12 @@ import java.io.Serializable;
 import org.gym.dao.GenericDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.transaction.annotation.Transactional;
+@Transactional
 public class GenericDaoImpl<K, E> implements GenericDao<K, E>{
 	
 	@Autowired
+	
 	SessionFactory sessionFactory;
 	
 	Class<E> entityClass;

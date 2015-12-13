@@ -16,13 +16,13 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
         	
-            <li class="${page == 'enquiry' ? 'active' : ''}">
-                <a href="${pageContext.request.contextPath}/enquiry">
+            <li class="${page == 'enquiry' ? 'active' : ''}">0
+                <a href="${pageContext.request.contextPath}/enquiry" >
                     <i class="fa fa-dashboard"></i> <span>Enquiry</span>
                 </a>
             </li>
             <li class="${page == 'registration' ? 'active' : ''}">
-                <a href="pages/widgets.html">
+                <a href="${pageContext.request.contextPath}/memberRegisterHome">
                     <i class="fa fa-edit"></i> <span>Registration</span> 
                 </a>
             </li>

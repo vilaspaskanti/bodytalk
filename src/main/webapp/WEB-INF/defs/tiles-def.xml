@@ -14,5 +14,4 @@
     <definition name="admin/*" extends="defaultTemplate">
 		<put-attribute name="body" value="/views/{1}.jsp"></put-attribute>    
     </definition>
-  
 </tiles-definitions>

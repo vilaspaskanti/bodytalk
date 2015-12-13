@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public GymUser saveUser(GymUser user) {
+		System.out.println("New User added");
 		return userDao.save(user);
 	}
 	
