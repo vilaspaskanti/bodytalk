@@ -16,15 +16,19 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
         	
-            <li class="${page == 'enquiry' ? 'active' : ''}">0
+            <li class="${page == 'enquiry' ? 'active' : ''}">
                 <a href="${pageContext.request.contextPath}/enquiry" >
                     <i class="fa fa-dashboard"></i> <span>Enquiry</span>
                 </a>
             </li>
-            <li class="${page == 'registration' ? 'active' : ''}">
-                <a href="${pageContext.request.contextPath}/memberRegisterHome">
+            <li class="treeview ${page == 'registration' ? 'active' : ''}">
+                <a href="#">
                     <i class="fa fa-edit"></i> <span>Registration</span> 
                 </a>
+                <ul style="display: block;" class="treeview-menu">
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/memberRegisterHome"><i class="fa fa-angle-double-right"></i> Member Registration</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/packageRegisterHome"><i class="fa fa-angle-double-right"></i> Package Registration</a></li>
+                </ul>
             </li>
 			<li class="${page == 'payments' ? 'active' : ''}">
                 <a href="pages/widgets.html">

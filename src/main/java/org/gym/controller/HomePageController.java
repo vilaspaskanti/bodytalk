@@ -21,14 +21,15 @@ public class HomePageController {
 	UserService service;
 	@RequestMapping(value="/memberRegisterHome",method = RequestMethod.GET)
 	public String registerHome(Model model) {
-		model.addAttribute("page","enquiry");
+		model.addAttribute("page","registration");
 		return "admin/memberRegister";
 	}
 	
 	@RequestMapping(value="/memberRegisterSubmit",method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("memberRegister") @Valid MemberRegisterForm memberForm, BindingResult bindingResult,Model model) {
 		
-		model.addAttribute("memberRegister", memberForm);
+	
+		model.addAttribute("page", "registration");
 		if(bindingResult.hasErrors())
 		{
 			
