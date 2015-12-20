@@ -2,6 +2,7 @@ package org.gym.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,19 +30,18 @@ public class Registration {
 	private Date startDate;
 	private BigDecimal balanceDue;
 	private String status;
-
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "REGISTRATION_PACKAGE", joinColumns = {
+			@JoinColumn(name = "registration_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "package_id", nullable = false, updatable = false) })
+	private Set<GymPackage> packages;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", nullable = false)
 	private GymUser gymUser;
 
-	/*
-	 * @ManyToMany(fetch = FetchType.EAGER)
-	 * 
-	 * @JoinTable(name="REGISTRATION_PACKAGE",
-	 * joinColumns=@JoinColumn(name="registration_id",referencedColumnName="id")
-	 * , inverseJoinColumns=@JoinColumn(name="package_id",referencedColumnName=
-	 * "id")) private Set<GymPackage> packages;
-	 */
+	public Set<GymPackage> getPackages() {
+		return packages;
+	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "registration")
 	private Set<Payment> payments;
@@ -74,6 +76,10 @@ public class Registration {
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+
+	public void setPackages(Set<GymPackage> packages) {
+		this.packages = packages;
 	}
 
 	public GymUser getGymUser() {

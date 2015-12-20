@@ -26,7 +26,9 @@ public interface UserService {
 	
 	public Payment createPaymentTransaction(final Payment transaction);
 	
-	public GymPackage createPackage(final GymPackage gymPackage);
+	public GymPackage saveOrUpdatePackage(final GymPackage gymPackage);
+	
+	public List<GymPackage> getPackages(final String name);
 	
 	public List<Registration> getRegistrations(final GymUser gymUser);
 	

@@ -1,9 +1,16 @@
 package org.gym.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import org.gym.form.GymPackageForm;
 
 @Entity
 public class GymPackage {
@@ -18,7 +25,15 @@ public class GymPackage {
 	
 	private String description;
 	
-	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "packages")
+	private Set<Registration> registrations = new HashSet<Registration>(0);
+
+	public GymPackage() {
+		super();
+	}
+	public Set<Registration> getRegistrations() {
+		return this.registrations;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -49,6 +64,13 @@ public class GymPackage {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public GymPackage(final GymPackageForm form) {
+		super();
+		this.id = form.getId();
+		this.code = form.getCode();
+		this.name = form.getName();
+		this.description = form.getDescription();
 	}
 		
 }

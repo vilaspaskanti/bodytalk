@@ -11,5 +11,5 @@ public interface RegistrationDao extends GenericDao<Long, Registration> {
 	List<Registration> getRegistrations(final GymUser gymUser);
 	
 	List<Registration> getRegistrations(final Date startDate, final Date endDate);
-	
+ 	
 }

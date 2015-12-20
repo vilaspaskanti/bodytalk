@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.gym.dao.AttendenceDao;
+import org.gym.dao.PackageDao;
 import org.gym.dao.PaymentDao;
 import org.gym.dao.RegistrationDao;
 import org.gym.dao.UserDao;
@@ -28,6 +29,8 @@ public class UserServiceImpl implements UserService {
 	PaymentDao paymentDao;
 	@Autowired
 	AttendenceDao attendenceDao;
+	@Autowired
+	PackageDao packageDao;
 
 	@Override
 	public GymUser saveUser(GymUser user) {
@@ -59,9 +62,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public GymPackage createPackage(GymPackage gymPackage) {
-		// TODO Auto-generated method stub
-		return null;
+	public GymPackage saveOrUpdatePackage(final GymPackage gymPackage) {
+		if(gymPackage.getId()!=null )
+		return packageDao.update(gymPackage);
+		else
+		return packageDao.save(gymPackage);
 	}
 
 	@Override
@@ -120,5 +125,11 @@ public class UserServiceImpl implements UserService {
 	public GymUser getUserCode(Long memberCode) {
 
 		return userDao.fetchEntityById(memberCode);
+	}
+
+	@Override
+	public List<GymPackage> getPackages(final String packageName) {
+
+			return packageDao.getPackageAjax(packageName);
 	}
 }

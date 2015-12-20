@@ -62,6 +62,10 @@ public class Payment {
 		return "Payment [id=" + id + ", paymentDate=" + paymentDate + ", paymentAmount=" + paymentAmount
 				+ ", registration=" + registration.getStartDate() + "]";
 	}
+
+	public Payment() {
+		super();
+	}
 	
 	
 }

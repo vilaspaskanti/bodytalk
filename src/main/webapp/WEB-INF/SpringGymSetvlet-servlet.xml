@@ -13,7 +13,12 @@
 	<context:component-scan base-package="org.gym.controller"></context:component-scan>
 	
 	<!-- Used to serve static resources like css, images and javascript files-->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven>
+	<mvc:message-converters>
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+    </mvc:message-converters>
+	</mvc:annotation-driven>
     <mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	

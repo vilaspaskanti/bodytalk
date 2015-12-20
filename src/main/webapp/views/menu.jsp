@@ -16,10 +16,14 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
         	
-            <li class="${page == 'enquiry' ? 'active' : ''}">
-                <a href="${pageContext.request.contextPath}/enquiry" >
-                    <i class="fa fa-dashboard"></i> <span>Enquiry</span>
+            <li class="treeview ${page == 'gymPackage' ? 'active' : ''}">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Utilities</span>
                 </a>
+                <ul style="display: block;" class="treeview-menu">
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/gymPackageHome"><i class="fa fa-angle-double-right"></i>Add/Edit Package</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/addEnquiryPackages"><i class="fa fa-angle-double-right"></i>Add Enquiry</a></li>
+                </ul>
             </li>
             <li class="treeview ${page == 'registration' ? 'active' : ''}">
                 <a href="#">
