@@ -9,11 +9,9 @@ import org.gym.form.MemberRegisterForm;
 import org.gym.model.GymPackage;
 import org.gym.model.GymPackageAjax;
 import org.gym.model.GymUser;
-import org.gym.model.Tag;
 import org.gym.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@ContextConfiguration(locations = {"classpath:app-Context.xml"})
 @Controller
 public class HomePageController {
 
