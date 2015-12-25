@@ -28,6 +28,7 @@ public class HomePageController {
 	
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public String showHome(Model model) {
+		model.addAttribute("page","enquiry");
 		return "admin/enquiry";
 	}
 	@RequestMapping(value="/memberRegisterHome",method = RequestMethod.GET)

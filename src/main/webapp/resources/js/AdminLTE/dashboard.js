@@ -207,7 +207,7 @@ $(function() {
         height: '250px'
     });
 
-    /* Morris.js Charts */
+    /* Morris.js Charts 
     // Sales chart
     var area = new Morris.Area({
         element: 'revenue-chart',
@@ -268,7 +268,7 @@ $(function() {
     });
 
 
-    /* BOX REFRESH PLUGIN EXAMPLE (usage with morris charts) */
+     BOX REFRESH PLUGIN EXAMPLE (usage with morris charts) 
     $("#loading-example").boxRefresh({
         source: "ajax/dashboard-boxrefresh-demo.php",
         onLoadDone: function(box) {
@@ -292,7 +292,7 @@ $(function() {
             });
         }
     });
-
+*/
     /* The todo list plugin */
     $(".todo-list").todolist({
         onCheck: function(ele) {

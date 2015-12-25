@@ -1,4 +1,5 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -24,6 +25,9 @@
         <link href="resources/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 		<script src="resources/ajax/jquery.1.10.2.min.js"></script>
 		<script src="resources/ajax/jquery.autocomplete.min.js"></script>
+		<!-- jQuery validate -->
+		<script src="resources/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.validate.js" type="text/javascript"></script>
 		<script src="resources/ajax/custom.js"></script>
 		<link href="resources/ajax/main.css" rel="stylesheet">
 
@@ -64,11 +68,13 @@
 <!--         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
  -->        <!-- jQuery UI 1.10.3 -->
         <!-- <script src="resources/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        
          --><!-- Bootstrap -->
         <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+        
         <!-- Morris.js charts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="resources/js/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <!-- <script src="resources/js/plugins/morris/morris.min.js" type="text/javascript"></script> -->
         <!-- Sparkline -->
         <script src="resources/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
         <!-- jvectormap -->
@@ -87,9 +93,13 @@
 
         <!-- AdminLTE App -->
         <script src="resources/js/AdminLTE/app.js" type="text/javascript"></script>
-        
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="resources/js/AdminLTE/dashboard.js" type="text/javascript"></script>        
-
+        <script src="resources/js/AdminLTE/dashboard.js" type="text/javascript"></script>
+        <!-- enquiry page js  -->
+        <c:if test="${page == 'enquiry' }">
+        	<script src="resources/js/enquiry.js" type="text/javascript"></script>
+        </c:if>
+                
+		
     </body>
 </html>
