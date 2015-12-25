@@ -21,7 +21,7 @@
                     <i class="fa fa-dashboard"></i> <span>Utilities</span>
                 </a>
                 <ul style="display: block;" class="treeview-menu">
-                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/addEnquiryPackages"><i class="fa fa-angle-double-right"></i>Add Enquiry</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/"><i class="fa fa-angle-double-right"></i>Add Enquiry</a></li>
                    <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/gymPackageHome"><i class="fa fa-angle-double-right"></i>Add/Edit Package</a></li>
                 </ul>
             </li>

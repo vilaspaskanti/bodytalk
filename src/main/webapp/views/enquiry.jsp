@@ -20,19 +20,19 @@
                  <div class="box-header">
                      <h3 class="box-title">Enquiry Details</h3>
                  </div>
-                 <form id="enquiryForm" action="saveEnquiry" method="post" >
+                 <form:form id="enquiryForm" action="saveEnquiry" method="post" modelAttribute="enquiryForm">
 	                 <div class="box-body">
 	                     <div class="row">
 	                         <div class="col-xs-6">
 	                         	<div class="form-group">
 		                         	<label>Firstname</label>
-		                            <input type="text" class="form-control" placeholder="Firstname" name="firstname" required>
+		                            <form:input class="form-control required" placeholder="Firstname" path="firstName"/>
 	                            </div>
 	                         </div>
 	                         <div class="col-xs-6">
 	     	                    <div class="form-group">
 		    	                   	<label>Lastname</label>
-	                             	<input type="text" class="form-control" placeholder="Lastname" name="lastname" required>
+	                             	<form:input class="form-control required" placeholder="Lastname" path="lastName" />
 	                             </div>
 	                         </div>
 	                     </div>
@@ -40,7 +40,7 @@
 	                     	<div class="col-xs-12">
 	                     		<div class="form-group">
 		                         	<label>Address</label>
-	                     			<textarea rows="3" class="form-control" placeholder="Address" cols=""></textarea>
+	                     			<form:textarea rows="3" class="form-control" placeholder="Address" path="address" cols=""></form:textarea>
 	                     		</div>	
 	                     	</div>
 	                     </div>
@@ -48,21 +48,22 @@
 	                         <div class="col-xs-6">
 	                         	<div class="form-group">
 		                         	<label>Phone number</label>
-	                             	<input type="text" class="form-control" placeholder="Phone no." name="phonenumber" required>
+	                             	<form:input class="form-control required" placeholder="Phone no." path="phoneNo" />
 	                            </div>
 	                         </div>
 	                         <div class="col-xs-6">
 	                         	<div class="form-group">
 		                         	<label>e-mail Id</label>
-	                             	<input type="text" class="form-control email" name="email" placeholder="E-mail Id">
+	                             	<form:input class="form-control email" path="emailId" placeholder="E-mail Id"/>
 	                            </div> 	
 	                         </div>
 	                     </div>
 	                     <div class="row">
 	                     	<div class="col-xs-6">
-	                     		<div class="form-group">
+	                     		<div class="form-group ${requestScope['org.springframework.validation.BindingResult.enquiryForm'].hasFieldErrors('age') ? 'has-error' : ''}">
 		                         	<label>Age</label>
-	                             	<input type="text" class="form-control number" name="age" placeholder="Age">
+	                             	<form:input class="form-control number" path="age" placeholder="Age"/>
+	                             	<label id="-error" class="error"><form:errors path="age" /></label>
 	                            </div> 	
 	                         </div>
 	                         	
@@ -72,11 +73,11 @@
 		                     	<div class="form-group">
 		                     		<label>Sex</label>
 		                     		<div class="">
-				                     	<input type="radio" name="sex" class="radio"
-												value="M" checked />Male
+				                     	<form:radiobutton path="sex" class="radio"
+												value="M" />Male
 									</div>
 									<div class="">
-										<input type="radio" name="sex" class="radio"
+										<form:radiobutton path="sex" class="radio"
 											value="F" />Female
 									</div>	
 								</div>
@@ -87,30 +88,34 @@
 		                     	<div class="form-group">
 		                     		<label>How you came to know about us?</label>
 		                     		<div class="">
-				                     	<input type="radio" name="gymInfo" class="radio"
-												value="M" checked />Newspaper
+				                     	<form:radiobutton path="wayOfContact" class="radio"
+												value="Newspaper"/>Newspaper
 									</div>
 									<div class="">
-										<input type="radio" name="gymInfo" class="radio"
-											value="F" />Facebook
+										<form:radiobutton path="wayOfContact" class="radio"
+											value="Facebook" />Facebook
 									</div>
 									<div class="">
-										<input type="radio" name="gymInfo" class="radio"
-											value="F" />Friend
+										<form:radiobutton path="wayOfContact" class="radio"
+											value="Friend" />Friend
 									</div>
 									<div class="">
-										<input type="radio" name="gymInfo" class="radio"
-											value="F" />Other
+										<form:radiobutton path="wayOfContact" class="radio"
+											value="Other" />Other
 									</div>	
 								</div>
 							</div>		
 	                     </div>
 	                 </div><!-- /.box-body -->
 	                 <div class="box-footer">
-	                     <button type="submit" class="btn btn-primary">Submit</button>
+	                     <button type="submit" class="btn btn-primary">Save</button>
 	                 </div>
-	             </form>    
-                 
+	             </form:form>    
+                 <c:if test="${success == 'success' }">
+	                 <div class="form-group has-success">
+	                     <label class="control-label"><i class="fa fa-check"></i> Gym enquirer added successfully !</label>
+	                 </div>
+                 </c:if>
              </div><!-- /.box -->
 		</div>
 	</div>

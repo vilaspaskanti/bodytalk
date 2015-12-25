@@ -5,6 +5,7 @@ $( document ).ready(function() {
         },
         unhighlight: function(element) {
             $(element).closest('.form-group').removeClass('has-error');
+            $(element).next('label.error').remove();
         }
 	});
 });
