@@ -1,6 +1,8 @@
 package org.gym.controller;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -8,11 +10,13 @@ import org.dozer.DozerBeanMapper;
 import org.gym.form.EnquiryForm;
 import org.gym.form.GymPackageForm;
 import org.gym.form.MemberRegisterForm;
+import org.gym.form.MemberRegistrationForm;
 import org.gym.model.Constants;
 import org.gym.model.GymPackage;
 import org.gym.model.GymPackageAjax;
 import org.gym.model.GymUser;
 import org.gym.model.Role;
+import org.gym.service.PackageService;
 import org.gym.service.RoleService;
 import org.gym.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +38,21 @@ public class HomePageController {
 	@Autowired
 	private RoleService roleService;
 	
+	@Autowired
+	private PackageService packageService;
+	
 	private EnquiryForm defaultEnquiryModel() {
 		EnquiryForm enquiryForm = new EnquiryForm();
 		enquiryForm.setSex("M");
 		enquiryForm.setWayOfContact("Newspaper");
 		return enquiryForm;
+	}
+	
+	private EnquiryForm defaultRegistrationModel() {
+		MemberRegistrationForm memberRegistrationForm = new MemberRegistrationForm();
+		memberRegistrationForm.setSex("M");
+		memberRegistrationForm.setWayOfContact("Newspaper");
+		return memberRegistrationForm;
 	}
 	
 	@RequestMapping(value="/",method = RequestMethod.GET)
@@ -71,11 +85,47 @@ public class HomePageController {
 		return "admin/enquiry";
 	}
 	
+	@RequestMapping(value="/fetchMemberEnquiryData",method = RequestMethod.GET)
+	public String fetchMemberEnquiryData(Model model, @RequestParam(name = "phoneno") String phoneNo) {
+		
+		GymUser gymUser = userService.getUserByPhoneNo(phoneNo);
+		
+		MemberRegistrationForm memberRegistrationForm = new MemberRegistrationForm();
+		if(gymUser != null) {
+			DozerBeanMapper mapper = new DozerBeanMapper();
+			mapper.map(gymUser, memberRegistrationForm);
+			memberRegistrationForm.setGymUserId(gymUser.getId());
+			model.addAttribute("memberRegistrationForm", memberRegistrationForm);
+		} else {
+			model.addAttribute("memberRegistrationForm", defaultRegistrationModel());
+		}
+		
+		List<GymPackage> arrlPackages = packageService.getAllPackages();
+		Map<String,String> packages = new HashMap<String,String>();
+		
+		for(GymPackage gymPackage : arrlPackages) {
+			packages.put(gymPackage.getCode(), gymPackage.getName());
+		}
+		
+		model.addAttribute("packageList",packages);
+		
+		return "ajax/memberRegistrationForm";
+	}
 	
 	@RequestMapping(value="/memberRegisterHome",method = RequestMethod.GET)
 	public String registerHome(Model model) {
+		
+		List<GymPackage> arrlPackages = packageService.getAllPackages();
+		Map<String,String> packages = new HashMap<String,String>();
+		
+		for(GymPackage gymPackage : arrlPackages) {
+			packages.put(gymPackage.getCode(), gymPackage.getName());
+		}
+		
 		model.addAttribute("page","registration");
-		return "admin/memberRegister";
+		model.addAttribute("packageList",packages);
+		model.addAttribute("memberRegistrationForm", defaultRegistrationModel());
+		return "admin/memberRegistration";
 	}
 	
 	@RequestMapping(value="/memberRegisterSubmit",method = RequestMethod.POST)

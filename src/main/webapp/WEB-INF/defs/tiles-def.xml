@@ -14,4 +14,13 @@
     <definition name="admin/*" extends="defaultTemplate" >
 		<put-attribute name="body" value="/views/{1}.jsp"></put-attribute>    
     </definition>
+    
+    <definition name="ajaxTemplate" template="/views/ajaxtemplate.jsp" >
+        <put-attribute name="body" value="" />
+    </definition>
+    
+    <definition name="ajax/*" extends="ajaxTemplate" >
+		<put-attribute name="body" value="/views/{1}.jsp"></put-attribute>    
+    </definition>
+    
 </tiles-definitions>

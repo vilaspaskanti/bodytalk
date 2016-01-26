@@ -16,7 +16,7 @@ public interface UserService {
 	
 	public GymUser getUser(Long memberId);
 	
-	public GymUser getUserPhoneNo(Long phoneNo);
+	public GymUser getUserByPhoneNo(String phoneNo);
 	
 	public GymUser getUserCode(Long memberCode);
 	

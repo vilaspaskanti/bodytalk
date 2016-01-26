@@ -32,7 +32,7 @@ public class UserTest {
 	}
 	
 	
-	/*@Test*/
+	@Test
 	@Rollback(value=false)
 	public void testUser() {
 		GymUser user = new GymUser();

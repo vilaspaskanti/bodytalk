@@ -30,6 +30,10 @@
         <script src="resources/js/jquery.validate.js" type="text/javascript"></script>
 		<script src="resources/ajax/custom.js"></script>
 		<link href="resources/ajax/main.css" rel="stylesheet">
+		
+		<link href="resources/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+		
+		<link href="resources/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,6 +76,9 @@
          --><!-- Bootstrap -->
         <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
         
+        <script src="resources/js/bootstrap-multiselect.js" type="text/javascript"></script>
+        <script src="resources/js/bootstrap-multiselect-collapsible-groups.js" type="text/javascript"></script>
+        
         <!-- Morris.js charts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <!-- <script src="resources/js/plugins/morris/morris.min.js" type="text/javascript"></script> -->
@@ -90,7 +97,9 @@
         <script src="resources/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- iCheck -->
         <script src="resources/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-
+		
+		<script src="resources/js/bootstrap-datepicker.js" type="text/javascript"></script>
+		
         <!-- AdminLTE App -->
         <script src="resources/js/AdminLTE/app.js" type="text/javascript"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -98,6 +107,9 @@
         <!-- enquiry page js  -->
         <c:if test="${page == 'enquiry' }">
         	<script src="resources/js/enquiry.js" type="text/javascript"></script>
+        </c:if>
+        <c:if test="${page == 'registration' }">
+        	<script src="resources/js/memberRegistration.js" type="text/javascript"></script>
         </c:if>
                 
 		

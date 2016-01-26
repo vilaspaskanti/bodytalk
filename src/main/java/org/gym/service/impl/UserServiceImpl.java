@@ -116,12 +116,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public GymUser getUserPhoneNo(Long phoneNo) {
-		
-		return null;
-	}
-
-	@Override
 	public GymUser getUserCode(Long memberCode) {
 
 		return userDao.fetchEntityById(memberCode);
@@ -131,5 +125,10 @@ public class UserServiceImpl implements UserService {
 	public List<GymPackage> getPackages(final String packageName) {
 
 			return packageDao.getPackageAjax(packageName);
+	}
+
+	@Override
+	public GymUser getUserByPhoneNo(String phoneNo) {
+		return userDao.getUserByPhoneNo(phoneNo);
 	}
 }
