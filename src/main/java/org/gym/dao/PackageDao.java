@@ -11,5 +11,7 @@ public interface PackageDao extends GenericDao<Long, GymPackage> {
 	List<GymPackage> getPackageAjax(final String name);
 	
 	GymPackage getPackages(final String name);
+
+	GymPackage getPackageByCode(String packageCode);
  	
 }

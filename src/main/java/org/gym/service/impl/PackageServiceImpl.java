@@ -19,4 +19,9 @@ public class PackageServiceImpl implements PackageService {
 		return packageDao.getPackages();
 	}
 
+	@Override
+	public GymPackage getPackageByCode(String packageCode) {
+		return packageDao.getPackageByCode(packageCode);
+	}
+
 }

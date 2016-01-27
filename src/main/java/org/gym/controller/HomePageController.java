@@ -1,8 +1,14 @@
 package org.gym.controller;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,6 +21,8 @@ import org.gym.model.Constants;
 import org.gym.model.GymPackage;
 import org.gym.model.GymPackageAjax;
 import org.gym.model.GymUser;
+import org.gym.model.Payment;
+import org.gym.model.Registration;
 import org.gym.model.Role;
 import org.gym.service.PackageService;
 import org.gym.service.RoleService;
@@ -128,7 +136,86 @@ public class HomePageController {
 		return "admin/memberRegistration";
 	}
 	
-	@RequestMapping(value="/memberRegisterSubmit",method = RequestMethod.POST)
+	@RequestMapping(value="/saveMemberRegistration",method = RequestMethod.POST)
+	public String saveMemberRegistration(@ModelAttribute("memberRegistrationForm") @Valid MemberRegistrationForm memberRegistrationForm, BindingResult bindingResult, Model model) throws ParseException {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+		model.addAttribute("page","registration");
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("memberRegistrationForm", memberRegistrationForm);
+		} else {
+			GymUser gymUser = null;
+			DozerBeanMapper mapper = new DozerBeanMapper();
+			
+			if(memberRegistrationForm.getGymUserId() != null) {
+				gymUser = userService.getUser(memberRegistrationForm.getGymUserId());
+			} else {
+				gymUser = userService.getUserByPhoneNo(memberRegistrationForm.getPhoneNo());
+				if(gymUser == null) {
+					gymUser = new GymUser();
+				}
+			}
+			
+			//populate user meta data
+			mapper.map(memberRegistrationForm, gymUser);
+			
+			//populate packages, fees, and member registration
+			Role role = roleService.getRole(Constants.GYM_MEMBER);
+			gymUser.setRole(role);
+			
+			String packages [] = memberRegistrationForm.getPackages().split(",");
+			Set<Registration> registrations = new HashSet<Registration>();
+			Registration registration = new Registration();
+			Payment payment = new Payment();
+			Set<GymPackage> packagesSet = new HashSet<GymPackage>();
+			Set<Payment> payments = new HashSet<Payment>();
+			GymPackage pkg = null;
+			
+			for(String packageCode : packages) {
+				pkg = packageService.getPackageByCode(packageCode);
+				packagesSet.add(pkg);
+			}
+			
+			
+			//payments.add(payment);
+			
+			registration.setPackages(packagesSet);
+			registration.setStartDate(formatter.parse(memberRegistrationForm.getStartDate()));
+			registration.setExpiryDate(formatter.parse(memberRegistrationForm.getExpiryDate()));
+			//registration.setPayments(payments);
+			
+			BigDecimal balanceDue = BigDecimal.valueOf(Double.valueOf(memberRegistrationForm.getFees())-Double.valueOf(memberRegistrationForm.getAmountPaid()));
+			
+			registration.setBalanceDue(balanceDue);
+			registration.setPackageCost(Double.valueOf(memberRegistrationForm.getFees()));
+			registration.setGymUser(gymUser);
+			userService.saveRegistration(registration);
+			
+			payment.setPaymentAmount(Double.parseDouble(memberRegistrationForm.getAmountPaid()));
+			payment.setPaymentDate(new Date());
+			payment.setRegistration(registration);
+			userService.createPaymentTransaction(payment);
+			
+			//registrations.add(registration);
+			//gymUser.setRegistrations(registrations);
+			
+			userService.updateUser(gymUser);
+			model.addAttribute("success", "success");
+		}
+		
+		List<GymPackage> arrlPackages = packageService.getAllPackages();
+		Map<String,String> packages = new HashMap<String,String>();
+		
+		for(GymPackage gymPackage : arrlPackages) {
+			packages.put(gymPackage.getCode(), gymPackage.getName());
+		}
+		
+		model.addAttribute("packageList",packages);
+		
+		return "admin/memberRegistration";
+	}
+	
+	/*@RequestMapping(value="/memberRegisterSubmit",method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("memberRegister") @Valid MemberRegisterForm memberForm, BindingResult bindingResult,Model model) {
 		
 	
@@ -147,7 +234,7 @@ public class HomePageController {
 		model.addAttribute("message", "User Registered succesfully");
 		model.addAttribute("memberId", user.getId());
 		return "admin/memberRegister";
-	}
+	}*/
 	@RequestMapping(value="/packageRegisterHome",method = RequestMethod.POST)
 	public String registerPackage(@ModelAttribute("packageRegister") @Valid MemberRegisterForm memberForm, BindingResult bindingResult,Model model) {
 		

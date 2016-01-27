@@ -45,6 +45,8 @@ public interface UserService {
 	public void expireRegistration(final Registration registration);
 	
 	public void checkMemberValid(final GymUser gymUser);
+
+	public GymUser updateUser(GymUser gymUser);
 	
 	
 }

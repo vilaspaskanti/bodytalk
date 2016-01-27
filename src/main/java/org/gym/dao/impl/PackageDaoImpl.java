@@ -43,6 +43,16 @@ public class PackageDaoImpl extends GenericDaoImpl<Long, GymPackage> implements 
 		return gymPackages;
 	}
 
+	@Override
+	public GymPackage getPackageByCode(String packageCode) {
+		final String hql = "FROM GymPackage g where g.code = :packageCode";
+		final Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("packageCode", packageCode);
+		@SuppressWarnings("unchecked")
+		final GymPackage gymPackage= (GymPackage) query.uniqueResult();
+		return gymPackage;
+	}
+
 	
 	
 }

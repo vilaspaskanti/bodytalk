@@ -43,7 +43,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-6">
-		<div class="form-group ${requestScope['org.springframework.validation.BindingResult.enquiryForm'].hasFieldErrors('age') ? 'has-error' : ''}">
+		<div class="form-group ${requestScope['org.springframework.validation.BindingResult.enquiryForm'].hasFieldErrors('age') || requestScope['org.springframework.validation.BindingResult.memberRegistrationForm'].hasFieldErrors('age') ? 'has-error' : ''}">
      	<label>Age</label>
         	<form:input class="form-control number" path="age" placeholder="Age"/>
         	<label id="-error" class="error"><form:errors path="age" /></label>

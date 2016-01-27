@@ -7,5 +7,7 @@ import org.gym.model.GymPackage;
 public interface PackageService {
 	
 	public List<GymPackage> getAllPackages();
+
+	public GymPackage getPackageByCode(String packageCode);
 	
 }

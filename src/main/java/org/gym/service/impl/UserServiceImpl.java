@@ -131,4 +131,9 @@ public class UserServiceImpl implements UserService {
 	public GymUser getUserByPhoneNo(String phoneNo) {
 		return userDao.getUserByPhoneNo(phoneNo);
 	}
+
+	@Override
+	public GymUser updateUser(GymUser gymUser) {
+		return userDao.update(gymUser);
+	}
 }
