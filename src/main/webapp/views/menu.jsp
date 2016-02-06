@@ -31,7 +31,7 @@
                 </a>
                 <ul style="display: block;" class="treeview-menu">
                    <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/memberRegisterHome"><i class="fa fa-angle-double-right"></i> Member Registration</a></li>
-                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/packageRegisterHome"><i class="fa fa-angle-double-right"></i> Package Registration</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/addPackageRegistration"><i class="fa fa-angle-double-right"></i> Add Registration</a></li>
                 </ul>
             </li>
 			<li class="${page == 'payments' ? 'active' : ''}">

@@ -111,6 +111,9 @@
         <c:if test="${page == 'registration' }">
         	<script src="${pageContext.request.contextPath}/resources/js/memberRegistration.js" type="text/javascript"></script>
         </c:if>
+        <c:if test="${page == 'addPackage' }">
+        	<script src="${pageContext.request.contextPath}/resources/js/addPackage.js" type="text/javascript"></script>
+        </c:if>
                 
 		
     </body>

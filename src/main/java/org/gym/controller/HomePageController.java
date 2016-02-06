@@ -282,4 +282,32 @@ public class HomePageController {
 		}
 		return p1;
 	}
+	
+	@RequestMapping(value="/addPackageRegistration",method = RequestMethod.GET)
+	public String addPackageRegistration(Model model) {
+		
+		model.addAttribute("page","addPackage");
+		
+		return "admin/editRegistration";
+	}
+	
+	@RequestMapping(value="/addPackage",method = RequestMethod.GET)
+	public String addPackage(Model model, @RequestParam(name = "phoneno") String phoneNo) {
+		
+		GymUser gymUser = userService.getUserByPhoneNo(phoneNo);
+		
+		Set<Registration> registrations = gymUser.getRegistrations();
+		 
+		List<GymPackage> arrlPackages = packageService.getAllPackages();
+		Map<String,String> packages = new HashMap<String,String>();
+		
+		for(GymPackage gymPackage : arrlPackages) {
+			packages.put(gymPackage.getCode(), gymPackage.getName());
+		}
+		
+		model.addAttribute("packageList",packages);
+		model.addAttribute("registrations",registrations);
+		
+		return "ajax/addRegistration";
+	}
 }
