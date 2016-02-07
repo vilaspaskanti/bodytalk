@@ -10,14 +10,11 @@
         <!-- font Awesome -->
         <link href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
-<<<<<<< HEAD
         <link href="${pageContext.request.contextPath}/resources/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-=======
         <link href="resources/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- DATA TABLES -->
         <link href="resources/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         
->>>>>>> Added Attendence screens add/View.
         <!-- Morris chart -->
         <link href="${pageContext.request.contextPath}/resources/css/morris/morris.css" rel="stylesheet" type="text/css" />
         <!-- jvectormap -->
