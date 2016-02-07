@@ -14,7 +14,6 @@
         <link href="resources/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- DATA TABLES -->
         <link href="resources/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-        
         <!-- Morris chart -->
         <link href="${pageContext.request.contextPath}/resources/css/morris/morris.css" rel="stylesheet" type="text/css" />
         <!-- jvectormap -->
