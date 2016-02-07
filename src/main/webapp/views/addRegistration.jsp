@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:if test="${not empty userFound && userFound }">
 <div class="box box-success">
 <div class="box-header">
                  <h3 class="box-title">Existing registration details</h3>
@@ -48,6 +49,32 @@
 <div class="box-header">
                  <h3 class="box-title">Add registration</h3>
              </div>
+             <!-- Form -->
+             <form:form id="addPackageForm" action="saveAddPackage" method="post" modelAttribute="addPackageForm">
+              <div class="box-body">
+              <form:hidden path="gymUserId" />
+              <div class="row">
+    <div class="col-xs-6">
+    	<div class="form-group">
+     	<label>Firstname</label>
+        <form:input class="form-control required" placeholder="Firstname" path="firstName" readonly="true"/>
+       </div>
+    </div>
+    <div class="col-xs-6">
+     <div class="form-group">
+    	<label>Lastname</label>
+        	<form:input class="form-control required" placeholder="Lastname" path="lastName" readonly="true"/>
+        </div>
+    </div>
+</div>
+              	<!-- package fields -->
+				<jsp:include page="packageFields.jsp"></jsp:include>
+              </div>
+              <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+              </form:form>
              
               
 </div>
+</c:if>

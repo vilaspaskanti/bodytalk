@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.dozer.DozerBeanMapper;
+import org.gym.form.AddPackageForm;
 import org.gym.form.EnquiryForm;
 import org.gym.form.GymPackageForm;
 import org.gym.form.MemberRegisterForm;
@@ -296,17 +297,28 @@ public class HomePageController {
 		
 		GymUser gymUser = userService.getUserByPhoneNo(phoneNo);
 		
-		Set<Registration> registrations = gymUser.getRegistrations();
-		 
-		List<GymPackage> arrlPackages = packageService.getAllPackages();
-		Map<String,String> packages = new HashMap<String,String>();
-		
-		for(GymPackage gymPackage : arrlPackages) {
-			packages.put(gymPackage.getCode(), gymPackage.getName());
+		if(gymUser != null) {
+			Set<Registration> registrations = gymUser.getRegistrations();
+			 
+			List<GymPackage> arrlPackages = packageService.getAllPackages();
+			Map<String,String> packages = new HashMap<String,String>();
+			
+			for(GymPackage gymPackage : arrlPackages) {
+				packages.put(gymPackage.getCode(), gymPackage.getName());
+			}
+			
+			AddPackageForm addPackageForm = new AddPackageForm();
+			addPackageForm.setFirstName(gymUser.getFirstName());
+			addPackageForm.setLastName(gymUser.getLastName());
+			addPackageForm.setGymUserId(gymUser.getId());
+			
+			model.addAttribute("packageList",packages);
+			model.addAttribute("userFound",true);
+			model.addAttribute("registrations",registrations);
+			model.addAttribute("addPackageForm",addPackageForm);
+		} else {
+			model.addAttribute("userFound",false);
 		}
-		
-		model.addAttribute("packageList",packages);
-		model.addAttribute("registrations",registrations);
 		
 		return "ajax/addRegistration";
 	}
