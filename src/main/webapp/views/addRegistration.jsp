@@ -9,7 +9,7 @@
 <div class="box-header">
                  <h3 class="box-title">Existing registration details</h3>
              </div>
-             <div>
+             <div class="box-body">
              	<c:forEach items="${registrations}" var="registration">
              		<c:forEach items="${registration.packages}" var="pkg" varStatus="stat">
              			<c:set var="pkgs" value="${stat.first ? '' : pkgs} ${pkg.name}"></c:set> 
@@ -50,7 +50,7 @@
                  <h3 class="box-title">Add registration</h3>
              </div>
              <!-- Form -->
-             <form:form id="addPackageForm" action="saveAddPackage" method="post" modelAttribute="addPackageForm">
+             <form:form id="addPackageForm" action="" method="post" modelAttribute="addPackageForm">
               <div class="box-body">
               <form:hidden path="gymUserId" />
               <div class="row">

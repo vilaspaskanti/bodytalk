@@ -21,6 +21,7 @@ import org.gym.form.EnquiryForm;
 import org.gym.form.GymPackageForm;
 import org.gym.form.MemberRegisterForm;
 import org.gym.form.MemberRegistrationForm;
+import org.gym.form.ValidationReponseForm;
 import org.gym.form.ViewAttendanceForm;
 import org.gym.model.Attendance;
 import org.gym.model.Constants;
@@ -188,11 +189,9 @@ public class HomePageController {
 			gymUser.setRole(role);
 
 			String packages[] = memberRegistrationForm.getPackages().split(",");
-			Set<Registration> registrations = new HashSet<Registration>();
 			Registration registration = new Registration();
 			Payment payment = new Payment();
 			Set<GymPackage> packagesSet = new HashSet<GymPackage>();
-			Set<Payment> payments = new HashSet<Payment>();
 			GymPackage pkg = null;
 
 			for (String packageCode : packages) {
@@ -321,7 +320,7 @@ public class HomePageController {
 		
 		GymUser gymUser = userService.getUserByPhoneNo(phoneNo);
 		
-		if(gymUser != null) {
+		if(gymUser != null && gymUser.getRole().getRole().equalsIgnoreCase(Constants.GYM_MEMBER)) {
 			Set<Registration> registrations = gymUser.getRegistrations();
 			 
 			List<GymPackage> arrlPackages = packageService.getAllPackages();
@@ -413,5 +412,55 @@ public class HomePageController {
 			model.addAttribute("attendanceList", attendanceList);
 			return "admin/viewAttendance";
 			}
+	}
+	
+	@RequestMapping(value = "/saveAddPackage", method = RequestMethod.POST)
+	public @ResponseBody ValidationReponseForm saveAddPackage(@ModelAttribute("addPackageForm") @Valid AddPackageForm addPackageForm,
+			BindingResult bindingResult, Model model) throws ParseException {
+
+		ValidationReponseForm validationResponse = new ValidationReponseForm();
+		
+		model.addAttribute("page", "addPackage");
+		
+		GymUser gymUser = userService.getUser(addPackageForm.getGymUserId());
+		
+		validationResponse.setIdentifier(gymUser.getPhoneNo());
+		
+		String packages[] = addPackageForm.getPackages().split(",");
+		Registration registration = new Registration();
+		Payment payment = new Payment();
+		Set<GymPackage> packagesSet = new HashSet<GymPackage>();
+		GymPackage pkg = null;
+
+		for (String packageCode : packages) {
+			pkg = packageService.getPackageByCode(packageCode);
+			packagesSet.add(pkg);
+		}
+
+		// payments.add(payment);
+
+		registration.setPackages(packagesSet);
+		registration.setStartDate(formatter.parse(addPackageForm.getStartDate()));
+		registration.setExpiryDate(formatter.parse(addPackageForm.getExpiryDate()));
+		// registration.setPayments(payments);
+
+		BigDecimal balanceDue = BigDecimal.valueOf(Double.valueOf(addPackageForm.getFees())
+				- Double.valueOf(addPackageForm.getAmountPaid()));
+
+		registration.setBalanceDue(balanceDue);
+		registration.setPackageCost(Double.valueOf(addPackageForm.getFees()));
+		registration.setGymUser(gymUser);
+		userService.saveRegistration(registration);
+
+		payment.setPaymentAmount(Double.parseDouble(addPackageForm.getAmountPaid()));
+		payment.setPaymentDate(new Date());
+		payment.setRegistration(registration);
+		userService.createPaymentTransaction(payment);
+
+		userService.updateUser(gymUser);
+		
+		validationResponse.setStatus("SUCCESS");
+		
+		return validationResponse;
 	}
 }

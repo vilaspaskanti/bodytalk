@@ -14,6 +14,38 @@ function memberRegistrationInit() {
             } else {
               error.insertAfter(element);
             }
+          },
+          submitHandler: function(form) {
+        	  var formData = $("#addPackageForm").serialize();
+        	  $.ajax({
+          		method: "POST",
+          		data:formData,
+          		url: "saveAddPackage",
+          		dataType: "json",
+          		success: function(data) {
+          			if(data.status == 'SUCCESS') {
+          				$.ajax({
+          	        		method: "GET",
+          	        		url: "addPackage?phoneno="+data.identifier,
+          	        		success: function(data) {
+          	        	        $('#addRegistrationData').html(data);
+          	        	        $("input[type='checkbox'], input[type='radio']").iCheck({
+          	        	            checkboxClass: 'icheckbox_minimal',
+          	        	            radioClass: 'iradio_minimal'
+          	        	        });
+          	        	        memberRegistrationInit();
+          	        	        if($("#gymUserId").val()) {
+          	        	        	$("#searchResult").html('');
+          	        	        	$("#searchResult").html('<div class="form-group has-success"><label class="control-label">&nbsp;&nbsp;<i class="fa fa-check"></i> Below Registrations found! </label></div>');
+          	        	        } else {
+          	        	        	$("#searchResult").html('');
+          	        	        	$("#searchResult").html('<div class="form-group has-warning"><label class="control-label">&nbsp;&nbsp;<i class="fa fa-warning"></i> No such member found! </label></div>');
+          	        	        }
+          	        	    }
+          	        	});
+          			}
+          	    }
+          	});
           }
 	});
 	
