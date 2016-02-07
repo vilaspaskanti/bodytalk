@@ -128,12 +128,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public GymUser getUserByPhoneNo(String phoneNo) {
+	public GymUser getUserByPhoneNo(final String phoneNo) {
 		return userDao.getUserByPhoneNo(phoneNo);
 	}
 
 	@Override
 	public GymUser updateUser(GymUser gymUser) {
 		return userDao.update(gymUser);
+	}
+
+	@Override
+	public List<Attendance> getAttendance(String phoneNo, Date fromDate, Date toDate) {
+
+		return userDao.getAttendance(phoneNo, fromDate ,toDate);
 	}
 }

@@ -34,16 +34,18 @@ public class Attendance {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public GymUser getGymUser() {
 		return gymUser;
 	}
 
-	public void setGymUser(GymUser gymUser) {
+	public Attendance(final Date date,final GymUser gymUser) {
+		super();
+		this.date = date;
 		this.gymUser = gymUser;
+	}
+
+	public Attendance() {
+		super();
 	}
 	
 }

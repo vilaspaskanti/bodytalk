@@ -10,7 +10,14 @@
         <!-- font Awesome -->
         <link href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
+<<<<<<< HEAD
         <link href="${pageContext.request.contextPath}/resources/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+=======
+        <link href="resources/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <!-- DATA TABLES -->
+        <link href="resources/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+        
+>>>>>>> Added Attendence screens add/View.
         <!-- Morris chart -->
         <link href="${pageContext.request.contextPath}/resources/css/morris/morris.css" rel="stylesheet" type="text/css" />
         <!-- jvectormap -->
@@ -26,10 +33,13 @@
 		<script src="${pageContext.request.contextPath}/resources/ajax/jquery.1.10.2.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/ajax/jquery.autocomplete.min.js"></script>
 		<!-- jQuery validate -->
-		<script src="${pageContext.request.contextPath}/resources/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.js" type="text/javascript"></script>
-		<script src="${pageContext.request.contextPath}/resources/ajax/custom.js"></script>
-		<link href="${pageContext.request.contextPath}/resources/ajax/main.css" rel="stylesheet">
+		<script src="resources/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.validate.js" type="text/javascript"></script>
+		<script src="resources/ajax/custom.js"></script>
+		<script src="resources/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="resources/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+        
+		<link href="resources/ajax/main.css" rel="stylesheet">
 		
 		<link href="${pageContext.request.contextPath}/resources/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
 		
@@ -107,6 +117,12 @@
         <!-- enquiry page js  -->
         <c:if test="${page == 'enquiry' }">
         	<script src="${pageContext.request.contextPath}/resources/js/enquiry.js" type="text/javascript"></script>
+        </c:if>
+        <c:if test="${page == 'attendance' }">
+        	<script src="resources/js/attendance.js" type="text/javascript"></script>
+        </c:if>
+        <c:if test="${page == 'viewAttendance' }">
+        	<script src="resources/js/viewAttendance.js" type="text/javascript"></script>
         </c:if>
         <c:if test="${page == 'registration' }">
         	<script src="${pageContext.request.contextPath}/resources/js/memberRegistration.js" type="text/javascript"></script>

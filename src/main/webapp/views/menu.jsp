@@ -43,6 +43,10 @@
                 <a href="pages/widgets.html">
                     <i class="fa fa-th"></i> <span>Attendance</span> 
                 </a>
+                <ul style="display: block;" class="treeview-menu">
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/showAttendance"><i class="fa fa-angle-double-right"></i>Submit Attendance</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/viewAttendancePage"><i class="fa fa-angle-double-right"></i>View Attendance</a></li>
+                </ul>
             </li>
                                    
         </ul>

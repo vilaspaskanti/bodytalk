@@ -19,7 +19,7 @@
 </section>
 <span><c:if test="${not empty message}">
 		<div class="form-group has-success">
-			<label class="control-label" for="inputSuccess"><i
+			<label class="control-label" f or="inputSuccess"><i
 				class="fa fa-check"></i>
 			<c:out value="${message}" /> </label>
 		</div>

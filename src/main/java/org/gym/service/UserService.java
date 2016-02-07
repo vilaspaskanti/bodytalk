@@ -46,7 +46,9 @@ public interface UserService {
 	
 	public void checkMemberValid(final GymUser gymUser);
 
-	public GymUser updateUser(GymUser gymUser);
+	public GymUser updateUser(final GymUser gymUser);
+	
+	public List<Attendance> getAttendance(final String phoneNo, final Date fromDate ,final Date toDate);
 	
 	
 }

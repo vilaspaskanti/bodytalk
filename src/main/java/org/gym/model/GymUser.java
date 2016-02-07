@@ -1,5 +1,6 @@
 package org.gym.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,16 +11,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"phoneNo"}))
 public class GymUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="member_id")
+	
 	private Long id;
 	
 	private String firstName;
@@ -161,5 +166,12 @@ public class GymUser {
 		return "GymUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNo=" + phoneNo
 				+ "]";
 	}
-	
+	public boolean hasValidRegistration()
+	{
+		for (Registration r : this.registrations) {
+			if(r.getExpiryDate().after(new Date()))
+					return true;
+		}
+		return false;
+	}
 }
