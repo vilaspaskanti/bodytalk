@@ -339,6 +339,7 @@ public class HomePageController {
 			model.addAttribute("userFound",true);
 			model.addAttribute("registrations",registrations);
 			model.addAttribute("addPackageForm",addPackageForm);
+			model.addAttribute("formatter",formatter);
 		} else {
 			model.addAttribute("userFound",false);
 		}

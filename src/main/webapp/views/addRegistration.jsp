@@ -10,6 +10,30 @@
                  <h3 class="box-title">Existing registration details</h3>
              </div>
              <div class="box-body">
+             	
+             	<div class="row">
+             		<div class="col-xs-4">
+             			<div class="form-group">
+					     	<label>Packages</label>
+					       </div>
+             		</div>
+					    <div class="col-xs-3">
+					    	<div class="form-group">
+					     	<label>Start date</label>
+					       </div>
+					    </div>
+					    <div class="col-xs-3">
+					     <div class="form-group">
+					    	<label>Expiry date</label>
+					        </div>
+					    </div>
+					    <div class="col-xs-2">
+					     <div class="form-group">
+					    	<label>Amount</label>
+					        </div>
+					    </div>
+					</div> 
+             	
              	<c:forEach items="${registrations}" var="registration">
              		<c:forEach items="${registration.packages}" var="pkg" varStatus="stat">
              			<c:set var="pkgs" value="${stat.first ? '' : pkgs} ${pkg.name}"></c:set> 
@@ -17,25 +41,21 @@
              		<div class="row">
              		<div class="col-xs-4">
              			<div class="form-group">
-					     	<label>Packages</label>
 					        <input type="text" class="form-control" value="${pkgs}" readonly="readonly"/>
 					       </div>
              		</div>
 					    <div class="col-xs-3">
 					    	<div class="form-group">
-					     	<label>Start date</label>
-					        <input type="text" class="form-control" value="${registration.startDate }" readonly="readonly"/>
+					        <input type="text" class="form-control" value="${formatter.format(registration.startDate) }" readonly="readonly"/>
 					       </div>
 					    </div>
 					    <div class="col-xs-3">
 					     <div class="form-group">
-					    	<label>Expiry date</label>
-					        	<input type="text" class="form-control" value="${registration.expiryDate }" readonly="readonly"/>
+					        	<input type="text" class="form-control" value="${formatter.format(registration.expiryDate) }" readonly="readonly"/>
 					        </div>
 					    </div>
 					    <div class="col-xs-2">
 					     <div class="form-group">
-					    	<label>Amount</label>
 					        	<input type="text" class="form-control" value="${registration.packageCost }" readonly="readonly"/>
 					        </div>
 					    </div>
