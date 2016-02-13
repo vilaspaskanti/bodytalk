@@ -17,12 +17,15 @@ import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 import org.gym.form.AddPackageForm;
 import org.gym.form.AttendanceForm;
+import org.gym.form.CreatePaymentForm;
 import org.gym.form.EnquiryForm;
 import org.gym.form.GymPackageForm;
 import org.gym.form.MemberRegisterForm;
 import org.gym.form.MemberRegistrationForm;
+import org.gym.form.SearchPhoneForm;
 import org.gym.form.ValidationReponseForm;
 import org.gym.form.ViewAttendanceForm;
+import org.gym.form.ViewPaymentsForm;
 import org.gym.model.Attendance;
 import org.gym.model.Constants;
 import org.gym.model.GymPackage;
@@ -73,6 +76,11 @@ public class HomePageController {
 		memberRegistrationForm.setWayOfContact("Newspaper");
 		return memberRegistrationForm;
 	}
+	
+	private CreatePaymentForm  defaultPaymentModel() {
+		CreatePaymentForm createPaymentForm = new CreatePaymentForm();
+		return createPaymentForm;
+	}
 
 	private AttendanceForm defaultAttendanceModel() {
 		final AttendanceForm attendanceForm = new AttendanceForm();
@@ -84,6 +92,10 @@ public class HomePageController {
 		return viewAttendanceForm;
 	}
 
+	private ViewPaymentsForm defaultViewPaymentsModel() {
+		final ViewPaymentsForm viewPaymentsForm = new ViewPaymentsForm();
+		return viewPaymentsForm;
+	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showHome(Model model) {
@@ -127,8 +139,12 @@ public class HomePageController {
 			mapper.map(gymUser, memberRegistrationForm);
 			memberRegistrationForm.setGymUserId(gymUser.getId());
 			model.addAttribute("memberRegistrationForm", memberRegistrationForm);
+			model.addAttribute("memberDataForm", defaultEnquiryModel());
+			
 		} else {
 			model.addAttribute("memberRegistrationForm", defaultRegistrationModel());
+			model.addAttribute("memberDataForm", defaultEnquiryModel());
+			
 		}
 
 		List<GymPackage> arrlPackages = packageService.getAllPackages();
@@ -156,6 +172,7 @@ public class HomePageController {
 		model.addAttribute("page", "registration");
 		model.addAttribute("packageList", packages);
 		model.addAttribute("memberRegistrationForm", defaultRegistrationModel());
+		model.addAttribute("memberDataForm",  defaultEnquiryModel());
 		return "admin/memberRegistration";
 	}
 
@@ -164,10 +181,11 @@ public class HomePageController {
 			@ModelAttribute("memberRegistrationForm") @Valid MemberRegistrationForm memberRegistrationForm,
 			BindingResult bindingResult, Model model) throws ParseException {
 
-		
+		model.addAttribute("memberDataForm", defaultEnquiryModel());
 		model.addAttribute("page", "registration");
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("memberRegistrationForm", memberRegistrationForm);
+			
 		} else {
 			GymUser gymUser = null;
 			DozerBeanMapper mapper = new DozerBeanMapper();
@@ -214,7 +232,7 @@ public class HomePageController {
 			registration.setGymUser(gymUser);
 			userService.saveRegistration(registration);
 
-			payment.setPaymentAmount(Double.parseDouble(memberRegistrationForm.getAmountPaid()));
+			payment.setPaymentAmount(new BigDecimal(memberRegistrationForm.getAmountPaid()));
 			payment.setPaymentDate(new Date());
 			payment.setRegistration(registration);
 			userService.createPaymentTransaction(payment);
@@ -401,9 +419,6 @@ public class HomePageController {
 			return "admin/viewAttendance";
 		} else {
 
-			System.out.println(viewAttendanceForm.getPhoneNo()); 
-			System.out.println(viewAttendanceForm.getFromDate());
-			System.out.println(viewAttendanceForm.getToDate());
 			final Date startDate = viewAttendanceForm.getFromDate().isEmpty()?null:formatter.parse(viewAttendanceForm.getFromDate()); 
 			final Date endDate = viewAttendanceForm.getToDate().isEmpty()?null:formatter.parse(viewAttendanceForm.getToDate()); 
 			final List<Attendance> attendanceList = userService.getAttendance(viewAttendanceForm.getPhoneNo(), 
@@ -453,7 +468,7 @@ public class HomePageController {
 		registration.setGymUser(gymUser);
 		userService.saveRegistration(registration);
 
-		payment.setPaymentAmount(Double.parseDouble(addPackageForm.getAmountPaid()));
+		payment.setPaymentAmount(new BigDecimal(addPackageForm.getAmountPaid()));
 		payment.setPaymentDate(new Date());
 		payment.setRegistration(registration);
 		userService.createPaymentTransaction(payment);
@@ -464,4 +479,104 @@ public class HomePageController {
 		
 		return validationResponse;
 	}
+	@RequestMapping(value = "/showRegistrationsHome", method = RequestMethod.GET)
+	public String showRegistrationsHome(final Model model) {
+
+			model.addAttribute("page", "payment");
+			model.addAttribute("memberDataForm",  new SearchPhoneForm());
+			model.addAttribute("createPaymentForm",defaultPaymentModel());
+			return "admin/registrationResult";
+	}
+	@RequestMapping(value = "/showRegistrations", method = RequestMethod.POST)
+	public String createPaymentHome(@ModelAttribute("memberDataForm") @Valid SearchPhoneForm memberDataForm,
+			BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			
+			model.addAttribute("page", "payment");
+			model.addAttribute("memberDataForm",  defaultEnquiryModel());
+			model.addAttribute("createPaymentForm",defaultPaymentModel());
+		} else {
+
+		final GymUser user = userService.getUserByPhoneNo(memberDataForm.getPhoneNo());
+		final List<Registration> registrationList=userService.getRegistrations(user);
+		System.out.println("************"+registrationList.size()+"*****************");
+		for (Registration registration : registrationList) {
+			registration.getPackages();
+		}
+		model.addAttribute("registrationList", registrationList);
+		model.addAttribute("page", "payment");
+		model.addAttribute("memberDataForm",  defaultEnquiryModel());
+		model.addAttribute("createPaymentForm",defaultPaymentModel());
+		
+		}
+		model.addAttribute("page", "payment");
+		model.addAttribute("formatter",formatter);
+		return "admin/registrationResult";
+	}
+
+	@RequestMapping(value = "/createPayment", method = RequestMethod.POST)
+	public String createPayment(
+			@ModelAttribute("createPaymentForm") @Valid CreatePaymentForm createPaymentForm,
+			BindingResult bindingResult, Model model) throws ParseException {
+
+		model.addAttribute("page", "payment");
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("createPaymentForm", createPaymentForm);
+		} else {
+
+			final Registration reg = userService.getRegistration(Long.valueOf(createPaymentForm.getRegistrationId()));
+			final Payment payment = new Payment();
+			payment.setRegistration(reg);
+			payment.setPaymentDate(createPaymentForm.getPayDate().isEmpty()?null:formatter.parse(createPaymentForm.getPayDate()));
+			payment.setPaymentAmount(new BigDecimal(createPaymentForm.getAmount()));
+			payment.setComment(createPaymentForm.getComments());
+			reg.setBalanceDue(reg.getBalanceDue().subtract(payment.getPaymentAmount()));
+			
+			userService.createPaymentTransaction(payment);
+			userService.updateRegistration(reg);
+			model.addAttribute("success", "success");
+			final List<Payment> paymentList = userService.getPayments(reg);
+			model.addAttribute("paymentList", paymentList);
+			System.out.println(paymentList.toString());
+			
+			}
+		model.addAttribute("page", "payment");
+		model.addAttribute("formatter",formatter);
+		return "admin/payment";
+	}
+	@RequestMapping(value = "/viewPaymentsHome", method = RequestMethod.GET)
+	public String viewPaymentsHome(Model model) {
+
+		model.addAttribute("viewPaymentsForm", defaultViewPaymentsModel());
+		model.addAttribute("page", "viewPayments");
+		model.addAttribute("message", "");
+		return "admin/viewPayments";
+	}
+
+	
+	@RequestMapping(value = "/viewPayments", method = RequestMethod.POST)
+	public String viewPayments(@ModelAttribute("viewPaymentsForm") @Valid ViewPaymentsForm viewPaymentsForm,
+			BindingResult bindingResult, Model model) throws ParseException {
+
+		
+		model.addAttribute("page", "viewPayments");
+		if (bindingResult.hasErrors()) {
+			System.out.println("Binding result "+bindingResult.getAllErrors());
+			model.addAttribute("viewPaymentsForm", viewPaymentsForm);
+			return "admin/viewPayments";
+		} else {
+
+			final Date startDate = viewPaymentsForm.getFromDate().isEmpty()?null:formatter.parse(viewPaymentsForm.getFromDate()); 
+			final Date endDate = viewPaymentsForm.getToDate().isEmpty()?null:formatter.parse(viewPaymentsForm.getToDate()); 
+			final List<Payment> paymentList = userService.getPayments(viewPaymentsForm.getPhoneNo(), 
+					startDate,
+					endDate);
+			System.out.println(paymentList.size());
+			model.addAttribute("paymentList", paymentList);
+			model.addAttribute("formatter",formatter);
+			return "admin/viewPayments";
+			}
+		
+	}
+
 }

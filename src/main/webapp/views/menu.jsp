@@ -30,14 +30,19 @@
                     <i class="fa fa-edit"></i> <span>Registration</span> 
                 </a>
                 <ul style="display: block;" class="treeview-menu">
-                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/memberRegisterHome"><i class="fa fa-angle-double-right"></i> Member Registration</a></li>
-                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/addPackageRegistration"><i class="fa fa-angle-double-right"></i> Add Registration</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/memberRegisterHome"><i class="fa fa-angle-double-right"></i>Member Enrollment</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/addPackageRegistration"><i class="fa fa-angle-double-right"></i> Add Package Registration</a></li>
                 </ul>
             </li>
 			<li class="${page == 'payments' ? 'active' : ''}">
                 <a href="pages/widgets.html">
                     <i class="fa fa-money"></i> <span>Payments</span> 
                 </a>
+                <ul style="display: block;" class="treeview-menu">
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/showRegistrationsHome"><i class="fa fa-angle-double-right"></i> Add Payments</a></li>
+                   <li><a style="margin-left: 10px;" href="${pageContext.request.contextPath}/viewPaymentsHome"><i class="fa fa-angle-double-right"></i> View Payments</a></li>
+                </ul>
+                
             </li>
 			<li class="${page == 'attendance' ? 'active' : ''}">
                 <a href="pages/widgets.html">

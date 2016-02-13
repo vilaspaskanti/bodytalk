@@ -6,11 +6,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Attendance <small> Register/View attendance</small>
+		Payments <small> View Payments</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">View Attendance</li>
+		<li class="active">View Payments</li>
 	</ol>
 </section>
 <span><c:if test="${not empty message}">
@@ -23,11 +23,8 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">View Attendance</h3>
-				</div>
-				<form:form id="viewAttendanceForm" action="viewAttendance"
-					method="post" modelAttribute="viewAttendanceForm">
+				<form:form id="viewPaymentsForm" action="viewPayments"
+					method="post" modelAttribute="viewPaymentsForm">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-xs-6">
@@ -42,13 +39,13 @@
 							<div class="col-xs-6">
 								<div class="form-group">
 									<label>From Date : </label>
-									<form:input id="fromDate" class="form-control required" placeholder="Start date" path="fromDate"/>	
+									<form:input id="fromDate" class="form-control" placeholder="Start date" path="fromDate"/>	
 								</div>
 							</div>
 							<div class="col-xs-6">	
 								<div class="form-group">
 									<label>To Date : </label>
-									<form:input id="toDate" class="form-control required" placeholder="To Date"
+									<form:input id="toDate" class="form-control" placeholder="To Date"
 										path="toDate" />
 								</div>
 							</div>
@@ -67,37 +64,5 @@
 		<!-- /.box-header -->
 		</div>
 		</div>
-		<c:if test="${not empty attendanceList}">
-			<div class="box-body table-responsive">
-			
-				<table id="attendanceData" class="table table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Phone</th>
-							<th>In-Time</th>
-						</tr>
-					</thead>
-					<tbody>
-	<c:forEach items="${attendanceList}" var="current">
-        <tr>
-          <td><c:out value="${current.gymUser.firstName}" /></td>
-          <td><c:out value="${current.gymUser.lastName}" /></td>
-          <td><c:out value="${current.gymUser.phoneNo}" /></td>
-          <td><c:out value="${current.date}" /></td>
-        </tr>
-      </c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</c:if>
-		
+<jsp:include page="paymentListTemplate.jsp" />
 </section>
-        <script type="text/javascript">
-            $(function() {
-                $("#attendanceData").dataTable();
-                
-            });
-        </script>
-<!-- /.content -->

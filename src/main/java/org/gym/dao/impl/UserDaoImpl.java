@@ -6,6 +6,8 @@ import java.util.List;
 import org.gym.dao.UserDao;
 import org.gym.model.Attendance;
 import org.gym.model.GymUser;
+import org.gym.model.Payment;
+import org.gym.model.Registration;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
@@ -30,10 +32,25 @@ public class UserDaoImpl extends GenericDaoImpl<Long, GymUser> implements UserDa
 		return gymUser;
 	}
 	
+	private List<Registration> getRegistrations(String phoneNo) {
+
+		final Criteria cr = sessionFactory.getCurrentSession().createCriteria(Registration.class);
+		cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		if(!phoneNo.isEmpty() )
+		{
+			GymUser user = getUserByPhoneNo(phoneNo);
+			cr.add(Restrictions.eq("gymUser", user));
+		}
+		final List<Registration> registrationList = cr.list();
+		System.out.println(" registrationList.size " +registrationList.size());
+		return registrationList;
+	}
+	
 	@Override
 	public List<Attendance> getAttendance(String phoneNo, Date fromDate, Date toDate){
 		
 		final Criteria cr = sessionFactory.getCurrentSession().createCriteria(Attendance.class);
+		cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		if(!phoneNo.isEmpty() )
 		{
 			final GymUser user = getUserByPhoneNo(phoneNo);
@@ -51,5 +68,25 @@ public class UserDaoImpl extends GenericDaoImpl<Long, GymUser> implements UserDa
 		final List<Attendance> attendanceList = cr.list();
 		System.out.println(" attendanceList.size " +attendanceList.size());
 		return attendanceList;
+	}
+	@Override
+	public List<Payment> getPayments(final String phoneNo,final Date fromDate,final Date toDate){
+		
+		final Criteria cr = sessionFactory.getCurrentSession().createCriteria(Payment.class);
+		cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		final List<Registration> registrationList = getRegistrations(phoneNo);
+		cr.add(Restrictions.in("registration", registrationList));
+		if(fromDate !=null )
+		{
+			cr.add(Restrictions.ge("paymentDate", fromDate));
+		}
+		if(toDate !=null )
+		{
+			cr.add(Restrictions.le("paymentDate", toDate));
+		}
+		cr.addOrder(Order.desc("id"));
+		final List<Payment> paymentList = cr.list();
+		System.out.println(" paymentList.size " +paymentList.size());
+		return paymentList;
 	}
 }

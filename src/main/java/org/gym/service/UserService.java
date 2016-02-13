@@ -22,6 +22,8 @@ public interface UserService {
 	
 	public Registration saveRegistration(Registration registration);
 	
+	public Registration updateRegistration(Registration registration);
+	
 	public Attendance saveAttendence(final Attendance registration);
 	
 	public Payment createPaymentTransaction(final Payment transaction);
@@ -33,6 +35,8 @@ public interface UserService {
 	public List<Registration> getRegistrations(final GymUser gymUser);
 	
 	public List<Registration> getRegistrations(final Date startDate, final Date endDate);
+	
+	public Registration getRegistration(final Long registrationId );
 	
 	public List<Payment> getPayments(final Registration registration);
 	
@@ -50,5 +54,6 @@ public interface UserService {
 	
 	public List<Attendance> getAttendance(final String phoneNo, final Date fromDate ,final Date toDate);
 	
+	public List<Payment> getPayments(final String phoneNo, final Date fromDate ,final Date toDate);
 	
 }

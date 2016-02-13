@@ -19,7 +19,7 @@ public class RegistrationDaoImpl extends GenericDaoImpl<Long, Registration> impl
 	@Override
 	public List<Registration> getRegistrations(final GymUser gymUser) {
 
-		String hql = "FROM Registration R WHERE R.id = :member_id";
+		String hql = "FROM Registration R WHERE R.gymUser.id = :member_id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("member_id",gymUser.getId());
 		@SuppressWarnings("unchecked")
@@ -38,6 +38,4 @@ public class RegistrationDaoImpl extends GenericDaoImpl<Long, Registration> impl
 		System.out.println("results.size --- "+results.size());
 		return results;
 	}
-	
-	
 }

@@ -119,4 +119,37 @@ public class Registration {
 				+ startDate + ", gymUser=" + gymUser.getFirstName() + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((balanceDue == null) ? 0 : balanceDue.hashCode());
+		result = prime * result + ((expiryDate == null) ? 0 : expiryDate.hashCode());
+		result = prime * result + ((gymUser == null) ? 0 : gymUser.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((packageCost == null) ? 0 : packageCost.hashCode());
+		result = prime * result + ((packages == null) ? 0 : packages.hashCode());
+		result = prime * result + ((payments == null) ? 0 : payments.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Registration other = (Registration) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
 }

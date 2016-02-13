@@ -27,4 +27,6 @@
          <label class="control-label"><i class="fa fa-check"></i> Gym registration added successfully !</label>
      </div>
     </c:if>
+    
+    <jsp:include page="registrationResult.jsp" />
 </div><!-- /.box -->

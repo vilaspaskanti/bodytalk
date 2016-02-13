@@ -50,6 +50,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public Registration updateRegistration(Registration registration) {
+
+		return registrationDao.update(registration); 
+	}
+	
+	@Override
 	public Attendance saveAttendence(final Attendance attendence) {
 
 		return attendenceDao.save(attendence);
@@ -141,5 +147,17 @@ public class UserServiceImpl implements UserService {
 	public List<Attendance> getAttendance(String phoneNo, Date fromDate, Date toDate) {
 
 		return userDao.getAttendance(phoneNo, fromDate ,toDate);
+	}
+
+	@Override
+	public Registration getRegistration(Long registrationId) {
+
+		return registrationDao.fetchEntityById(registrationId);
+	}
+
+	@Override
+	public List<Payment> getPayments(String phoneNo, Date fromDate, Date toDate) {
+
+		return userDao.getPayments(phoneNo, fromDate ,toDate);
 	}
 }

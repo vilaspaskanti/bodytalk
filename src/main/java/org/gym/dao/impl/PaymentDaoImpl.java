@@ -4,10 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.gym.dao.PaymentDao;
+import org.gym.model.Attendance;
 import org.gym.model.GymUser;
 import org.gym.model.Payment;
 import org.gym.model.Registration;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -29,10 +33,12 @@ public class PaymentDaoImpl extends GenericDaoImpl<Long, Payment> implements Pay
 
 	@Override
 	public List<Payment> getPayments(Registration registration) {
-		String hql = " FROM Payment P JOIN P.registration R WITH (R.id=:registration_id) ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("registration_id",registration.getId());
-		List<Payment> results = query.list();
+		
+		final Criteria cr = sessionFactory.getCurrentSession().createCriteria(Payment.class);
+		cr.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			cr.add(Restrictions.eq("registration", registration));
+		cr.addOrder(Order.asc("id"));
+		List<Payment> results = cr.list();
 		return results;
 	}
 

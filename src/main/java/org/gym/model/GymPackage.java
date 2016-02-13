@@ -72,5 +72,10 @@ public class GymPackage {
 		this.name = form.getName();
 		this.description = form.getDescription();
 	}
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 		
 }

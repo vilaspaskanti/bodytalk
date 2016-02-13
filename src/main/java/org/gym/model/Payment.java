@@ -1,5 +1,6 @@
 package org.gym.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,7 +20,10 @@ public class Payment {
 	
 	private Date paymentDate;
 		
-	private Double paymentAmount;
+	private BigDecimal paymentAmount;
+	
+	private String comment;
+	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "registration_id", nullable = false)
@@ -41,11 +45,11 @@ public class Payment {
 		this.paymentDate = paymentDate;
 	}
 
-	public Double getPaymentAmount() {
+	public BigDecimal getPaymentAmount() {
 		return paymentAmount;
 	}
 
-	public void setPaymentAmount(Double paymentAmount) {
+	public void setPaymentAmount(BigDecimal paymentAmount) {
 		this.paymentAmount = paymentAmount;
 	}
 
@@ -65,6 +69,14 @@ public class Payment {
 
 	public Payment() {
 		super();
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	
 	

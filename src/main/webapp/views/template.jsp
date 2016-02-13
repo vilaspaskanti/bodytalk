@@ -126,7 +126,16 @@
         <c:if test="${page == 'addPackage' }">
         	<script src="${pageContext.request.contextPath}/resources/js/addPackage.js" type="text/javascript"></script>
         </c:if>
-                
+        <c:if test="${page == 'payment' }">
+        	<script src="${pageContext.request.contextPath}/resources/js/registrationResult.js" type="text/javascript"></script>
+        </c:if>
+        <c:if test="${page == 'payment' }">
+        	<script src="${pageContext.request.contextPath}/resources/js/payment.js" type="text/javascript"></script>
+        </c:if>        
+        <c:if test="${page == 'viewPayments' }">
+        	<script src="${pageContext.request.contextPath}/resources/js/viewPayments.js" type="text/javascript"></script>
+        </c:if>        
+
 		
     </body>
 </html>
