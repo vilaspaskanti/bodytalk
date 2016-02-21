@@ -134,7 +134,7 @@ public class HomePageController {
 		GymUser gymUser = userService.getUserByPhoneNo(phoneNo);
 
 		MemberRegistrationForm memberRegistrationForm = new MemberRegistrationForm();
-		if (gymUser != null) {
+		if (gymUser != null && !gymUser.getRole().getRole().equalsIgnoreCase(Constants.GYM_MEMBER)) {
 			DozerBeanMapper mapper = new DozerBeanMapper();
 			mapper.map(gymUser, memberRegistrationForm);
 			memberRegistrationForm.setGymUserId(gymUser.getId());
@@ -510,6 +510,7 @@ public class HomePageController {
 		
 		}
 		model.addAttribute("page", "payment");
+		model.addAttribute("result",true);
 		model.addAttribute("formatter",formatter);
 		return "admin/viewRegistration";
 	}

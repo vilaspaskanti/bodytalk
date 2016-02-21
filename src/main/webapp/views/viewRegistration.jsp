@@ -31,4 +31,6 @@
 		</form:form>
 	</div>
 </section>
+<c:if test="${not empty result && result }">
 <jsp:include page="registrationResult.jsp" />
+</c:if>

@@ -28,5 +28,4 @@
      </div>
     </c:if>
     
-    <jsp:include page="registrationResult.jsp" />
 </div><!-- /.box -->
