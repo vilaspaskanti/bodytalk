@@ -1,7 +1,5 @@
 package org.gym.form;
 
-import java.util.Date;
-
 public class CreatePaymentForm  {
 	
 	private String registrationId;

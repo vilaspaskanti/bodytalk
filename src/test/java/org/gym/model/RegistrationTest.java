@@ -21,7 +21,7 @@ public class RegistrationTest {
 	UserService userService;
 	
 	@Test
-	@Rollback(value=false)
+	@Rollback(value=true)
 	public void testFetchRegistration() {
 		
 		

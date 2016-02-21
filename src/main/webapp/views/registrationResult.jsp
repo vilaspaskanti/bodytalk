@@ -15,30 +15,6 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">View Registrations</h3>
-				</div>
-				<div>
-
-					<form:form id="memberDataForm" action="showRegistrations"
-						method="post" modelAttribute="memberDataForm">
-						<div class="box-body">
-							<div class="row">
-								<div class="col-xs-3">
-									<div class="form-group">
-										<label>Phone No.</label>
-										<form:input id="phnNoForSearch" name="phoneNo" path="phoneNo"
-											type="text" class="form-control required"
-											placeholder="Phone no." />
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-primary">Fetch Data</button>
-						</div>
-					</form:form>
-				</div>
 				<form:form id="createPaymentForm" action="createPayment"
 					method="post" modelAttribute="createPaymentForm">
 					<c:if test="${not empty registrationList}">
@@ -60,7 +36,7 @@
 									<c:forEach items="${registrationList}" var="current">
 										<tr id="registration_<c:out value="${current.id}" />">
 											<td><input type="radio" name="registrationId"
-												value="<c:out value="${current.id}" />"></td>
+												value="<c:out value="${current.id}" />" class="form-control required"></td>
 											<td><c:out value="${current.packages}" />
 												</td>
 											<td><c:out value="${formatter.format(current.startDate)}" /></td>
@@ -81,7 +57,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label>From Date : </label>
+								<label>Payment Date : </label>
 								<form:input id="payDate" class="form-control required"
 									placeholder="Payment Date" path="payDate" />
 							</div>

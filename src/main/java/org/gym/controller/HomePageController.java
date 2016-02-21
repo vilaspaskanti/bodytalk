@@ -485,7 +485,7 @@ public class HomePageController {
 			model.addAttribute("page", "payment");
 			model.addAttribute("memberDataForm",  new SearchPhoneForm());
 			model.addAttribute("createPaymentForm",defaultPaymentModel());
-			return "admin/registrationResult";
+			return "admin/viewRegistration";
 	}
 	@RequestMapping(value = "/showRegistrations", method = RequestMethod.POST)
 	public String createPaymentHome(@ModelAttribute("memberDataForm") @Valid SearchPhoneForm memberDataForm,
@@ -511,7 +511,7 @@ public class HomePageController {
 		}
 		model.addAttribute("page", "payment");
 		model.addAttribute("formatter",formatter);
-		return "admin/registrationResult";
+		return "admin/viewRegistration";
 	}
 
 	@RequestMapping(value = "/createPayment", method = RequestMethod.POST)

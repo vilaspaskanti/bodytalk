@@ -33,7 +33,7 @@ public class UserTest {
 	
 	
 	@Test
-	@Rollback(value=false)
+	@Rollback(value=true)
 	public void testUser() {
 		GymUser user = new GymUser();
 		user.setFirstName("Vilas");
@@ -45,7 +45,7 @@ public class UserTest {
 		 		
 	}
 	/*@Test*/
-	@Rollback(value=false)
+	@Rollback(value=true)
 	public void testRegistration() {
 	
 		GymUser user = userService.getUserCode(1L);
@@ -63,7 +63,7 @@ public class UserTest {
 	}
 	
 	/*@Test*/
-	@Rollback(value=false)
+	@Rollback(value=true)
 	public void testFetchRegistration() {
 		
 		GymUser user = new GymUser();
@@ -93,7 +93,7 @@ public class UserTest {
 	}
 
 	@Test
-	@Rollback(value=false)
+	@Rollback(value=true)
 	public void testFetchRegistration2() throws ParseException {
 		
 		String s1 = "20151110";

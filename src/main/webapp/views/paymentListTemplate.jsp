@@ -15,7 +15,9 @@
 						class="table table-bordered table-hover">
 						<thead>
 							<tr>
-							    <th>Registration Id</th>
+							    <th>Name</th>
+							    <th>Phone No.</th>
+							    <th>Packages</th>
 								<th>Pay Date</th>
 								<th>Pay Amount</th>
 								<th>Comments</th>
@@ -24,7 +26,11 @@
 						<tbody>
 							<c:forEach items="${paymentList}" var="current">
 								<tr>
-									<td><c:out value="${current.registration.id}" /></td>
+									<td><c:out value="${current.registration.gymUser.firstName}" />. 
+									<c:out value="${current.registration.gymUser.lastName}" />
+									</td>
+									<td><c:out value="${current.registration.gymUser.phoneNo}" /></td>
+									<td><c:out value="${current.registration.packages}" /></td>
 									<td><c:out value="${formatter.format(current.paymentDate) }" /></td>
 									<td><c:out value="${current.paymentAmount}" /></td>
 									<td><c:out value="${current.comment}" /></td> 

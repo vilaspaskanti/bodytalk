@@ -17,6 +17,10 @@ $( document ).ready(function() {
             $(element).next('label.error').remove();
         }
 	});
+	$('#fromDate').datepicker({
+	    format: "dd/mm/yyyy"
+	});
+
 });
 function initRegistrationId(registrationId)
 {
